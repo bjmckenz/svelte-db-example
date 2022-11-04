@@ -17,6 +17,11 @@ export function load({ params }) {
 	return { words: rows };
 }
 
+// If you're building an API (same behavior used multiple places, or wanting PUT/POST/DELETE)
+// see https://kit.svelte.dev/docs/routing#server
+// and do these things in +server.js.
+// this is a design choice -- which is cleaner? :shrug:
+
 // these are called when a form submits or you do a POST (at least)
 export const actions = {
   
@@ -25,6 +30,8 @@ export const actions = {
 		const form = await request.formData();
 
     const word = form.get('word');
+
+		// Shell, not browser console
 		console.log({ word });
 
     const stmt = db.prepare(`INSERT INTO words VALUES (?)`);
