@@ -1,11 +1,9 @@
 <script>
-	import WordTable from './WordTable.svelte';
+	import WordTable from '../../lib/WordTable.svelte';
 
 	let newval;
 
-	/** @type {import('./$types').PageData} */
 	export let data;
-	export let form;
 
 	// this is A way to show the new data when you modify existing stuff
 	// Probably better to either use the "form" property, or get the data with
@@ -16,6 +14,10 @@
 		location.reload();
 	}
 
+	// this is the "scripted form-fetch" approach. Instead of using a real <form>
+	// in the HTML, we manually fetch it ourselves. Note, POST. Note, pass params
+	// with FormData.
+	// We reload the page, including the new data.
 	async function add() {
 		// open Chrome debugger to see this message
 		console.log("clicked add!. would add '" + newval + "'");
@@ -30,14 +32,16 @@
 			body: formdata
 		});
 
-		// a POST redirects to the new resource
-		await response.json();
+		// Just display our list after fetching it from the DB via an endpoint (action "words").
+		const response1 = await fetch('?/words', {
+			method: 'POST',
+			body: new FormData()
+		});
 
-		/// ALTERNATIVE TO "post redirectst"
+		const response_json = await response1.json();
 
-		// either use the "form" variable, passed back from page.server
-		// OR make a call here and update the variable, say "data.words = ...."
-		// which will trigger page redisplay/update.
+		// updating of "data" here will trigger a UI update/repaint with the new item (data)
+		data = response_json.data;
 	}
 
 	// show that we loaded the data from the DB "at first page render"
@@ -50,16 +54,15 @@
 <div>
 	<WordTable words={data.words} />
 </div>
+<div class="note">scripted fetch/POST to page.server, no real form present</div>
+<div>
+	<input name="word" bind:value={newval} />
+	<input class="btn" type="button" on:click={add} value="Add This Entry" />
+</div>
 
-	<div>
-		<input bind:value={newval} />
-		<input class="btn" type="button" on:click={add} value="Add This Entry" />
-	</div>
-
-	<div>
-		<input class="btn" type="button" on:click={refresh} value="Refresh Page" />
-	</div>
-
+<div>
+	<input class="btn" type="button" on:click={refresh} value="Refresh Page" />
+</div>
 
 <style>
 	.title {

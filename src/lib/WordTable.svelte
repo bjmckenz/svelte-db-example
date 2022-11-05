@@ -8,13 +8,16 @@
 <table>
 	<thead>
 		<tr>
-			<th>The Words</th>
+			<th colspan=2>The Words</th>
+		</tr>
+		<tr>
+			<th>DB rowid</th><th>Word</th>
 		</tr>
 	</thead>
 	<tbody>
 		{#each words as aWord}
 			<tr>
-				<td class=word>{aWord.word}</td>
+				<td>{aWord.rowid}</td><td class=word>{aWord.word}</td>
 			</tr>
 		{/each}
 	</tbody>
