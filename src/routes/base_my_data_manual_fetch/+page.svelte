@@ -1,5 +1,5 @@
 <script>
-	import WordTable from '../../lib/WordTable.svelte';
+	import WordTable from '$lib/WordTable.svelte';
 
 	let newval;
 
@@ -48,13 +48,13 @@
 	console.log('first ', { data });
 </script>
 
-<div class="title">Base My Data!</div>
+<a href="/"><div class="title">Base My Data!</div></a>
+<div class="note">scripted fetch/POST to page.server, no real form present</div>
 <div class="note">Loads from DB when shown. Can add to DB. Click Refresh to reload from DB</div>
 
 <div>
 	<WordTable words={data.words} />
 </div>
-<div class="note">scripted fetch/POST to page.server, no real form present</div>
 <div>
 	<input name="word" bind:value={newval} />
 	<input class="btn" type="button" on:click={add} value="Add This Entry" />
@@ -66,13 +66,17 @@
 
 <style>
 	.title {
+		margin: 20px;
 		text-align: center;
-		font-size: 2vw;
+		font-size: 24pt;
 		font-family: Arial;
+		font-style: bold;
 	}
 	.note {
+		margin: 20px;
 		text-align: center;
-		font-size: 1vw;
+		font-size: 12pt;
 		font-family: Arial;
 	}
+
 </style>

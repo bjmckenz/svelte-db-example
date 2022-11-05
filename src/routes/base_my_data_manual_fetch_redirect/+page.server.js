@@ -6,7 +6,7 @@ const db = new Database('src/lib/database.db', {});
 
 // when page is first loaded...
 export function load({ params }) {
-	const stmt = db.prepare(`SELECT * FROM words`);
+	const stmt = db.prepare(`SELECT rowid,word FROM words`);
 	const rows = stmt.all();
 
 	rows.forEach((row) => {
@@ -50,7 +50,7 @@ export const actions = {
 	},
 
 	words: async ({ request }) => {
-		const stmt = db.prepare(`SELECT * FROM words`);
+		const stmt = db.prepare(`SELECT rowid,word FROM words`);
 		const rows = stmt.all();
 
 		// this will show up in the "data" element of the response.json() in the +page.svelte

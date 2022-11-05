@@ -32,6 +32,8 @@
 	});
 </script>
 
+<a href="/"><div class="ptitle">Base My Data!</div></a>
+
 <div class="title">Word as retrieved from the DB</div>
 
 {#if error}<div class="error">{error}</div>{/if}
@@ -39,6 +41,13 @@
 {#if word}<div class="data">Id: {word?.rowid}, Word: {word?.word}</div>{/if}
 
 <style>
+	.ptitle {
+		margin: 20px;
+		text-align: center;
+		font-size: 24pt;
+		font-family: Arial;
+		font-style: bold;
+	}
 	.title, .data, .error {
 		text-align: center;
 		font-size: 3vw;

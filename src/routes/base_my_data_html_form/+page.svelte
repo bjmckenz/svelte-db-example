@@ -1,5 +1,5 @@
 <script>
-	import WordTable from '../../lib/WordTable.svelte';
+	import WordTable from '$lib/WordTable.svelte';
 
 	let newval;
 
@@ -19,17 +19,17 @@
 	console.log('first ', { data });
 </script>
 
-<div class="title">Base My Data!</div>
+<a href="/"><div class="title">Base My Data!</div></a>
+<div class="note">Loads from DB when shown. Can add to DB. Click Refresh to reload from DB</div>
+<div class="note">FORM element to page.server</div>
 
 <div>
 	<WordTable words={data.words} />
 </div>
 
-<div class="note">FORM element to page.server</div>
 <div class="note">
 	This approach uses no JS to submit. Just the form action. It uses the same page.server.js action
-	as the scripted-form-fetch approach. Note that it correctly (for here) redirects to the created
-	entity (which is not implemented)
+	as the scripted-form-fetch approach.
 </div>
 <form method="POST" action="/base_my_data_html_form?/insertWord">
 	<div>
@@ -45,13 +45,17 @@
 
 <style>
 	.title {
+		margin: 20px;
 		text-align: center;
-		font-size: 2vw;
+		font-size: 24pt;
 		font-family: Arial;
+		font-style: bold;
 	}
 	.note {
+		margin: 20px;
 		text-align: center;
-		font-size: 1vw;
+		font-size: 12pt;
 		font-family: Arial;
 	}
+
 </style>
