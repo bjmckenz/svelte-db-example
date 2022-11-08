@@ -1,0 +1,27 @@
+
+.title {
+  margin: 20px;
+  text-align: center;
+  font-size: 24pt;
+  font-family: Arial;
+  font-style: bold;
+}
+
+.pagelink {
+    margin: 0.5in;
+    text-align: center;
+    font-size: 24pt;
+    font-family: Arial;
+    text-align: center;
+    width: 80%;
+    border-radius: 25px;
+    background: #adb4ec;
+    padding: 20px;
+  }
+
+  .note {
+  margin: 20px;
+  text-align: center;
+  font-size: 14pt;
+  font-family: Arial;
+}

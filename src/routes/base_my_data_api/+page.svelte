@@ -1,15 +1,22 @@
 <script>
+	import { onMount } from 'svelte';
 	import { goto } from "$app/navigation";
 	import WordTable from '$lib/WordTable.svelte';
 
 	let newval;
 
-	/** @type {import('./$types').PageData} */
+
+	// this is set by our page endpoint (+page.server.js) from the URL
 	export let data;
 
-	// this is A way to show the new data when you modify existing stuff
-	// Probably better to either use the "form" property, or get the data with
-	// a helper routine (see below in add() )
+	// initial mount needs to be told to load data. Otherwise no data load!
+	// this is because the other styles have a page endpoint (page.server.js)
+	// that is automagically hit, and it loads the data. Since the API style
+	// doesn't need the page.server, we must trigger the load ourselves here.
+	onMount(async () => {
+		refresh();
+	});
+
 	async function refresh() {
 
 		// open Chrome debugger to see this message
@@ -73,18 +80,3 @@
 	<input class="btn" type="button" on:click={refresh} value="Refresh Page" />
 </div>
 
-<style>
-	.title {
-		margin: 20px;
-		text-align: center;
-		font-size: 24pt;
-		font-family: Arial;
-		font-style: bold;
-	}
-	.note {
-		margin: 20px;
-		text-align: center;
-		font-size: 12pt;
-		font-family: Arial;
-	}
-</style>
