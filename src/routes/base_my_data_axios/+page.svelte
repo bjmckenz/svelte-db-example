@@ -1,10 +1,12 @@
 <script>
 	import { onMount } from 'svelte';
-	import { goto } from "$app/navigation";
+	import { goto } from '$app/navigation';
 	import WordTable from '$lib/WordTable.svelte';
 
-	let newval;
+	// https://www.sitepoint.com/axios-beginner-guide/
+	import axios from 'axios';
 
+	let newval;
 
 	// this is set by our page endpoint (+page.server.js) from the URL
 	export let data;
@@ -14,22 +16,19 @@
 	// that is automagically hit, and it loads the data. Since the API style
 	// doesn't need the page.server, we must trigger the load ourselves here.
 	onMount(async () => {
-		refresh();
+		const response = await axios.get('/api/words');
+		data = response.data;
 	});
 
 	async function refresh() {
-
 		// open Chrome debugger to see this message
 		console.log('clicked refresh!');
 
-		const response1 = await fetch('/api/words', {
-			method: 'GET'
-		});
+		const response = await axios.get('/api/words');
+		//console.log({response});
 
-		const response_json = await response1.json();
-		console.log({response_json});
 		// updating of "data" here will trigger a UI update/repaint with the new item
-		data.words = response_json.words;	
+		data = response.data;
 	}
 
 	// this is the "scripted form-fetch" approach. Instead of using a real <form>
@@ -48,26 +47,23 @@
 		newval = '';
 
 		// this matches an routine in /api/word/server.js
-		const response = await fetch('/api/word', {
-			method: 'POST',
-			body: formdata
+		axios({
+			method: 'post',
+			url: '/api/word',
+			data: formdata,
+		  headers: { "Content-Type": "multipart/form-data" }
 		});
-
- 		const r1_json = await response.json();
-		console.log({r1_json});
 
 		// reload page data
 		await refresh();
 	}
-
-	// show that we loaded the data from the DB "at first page render"
-	console.log('first ', { data });
 </script>
 
 <a href="/"><div class="title">Base My Data!</div></a>
 <div class="note">Loads from DB when shown. Can add to DB. Click Refresh to reload from DB</div>
 
-<div class="note">API at /api/word & /api/words</div>
+<div class="note">Uses Axios instead of fetch() in this page</div>
+<div class="note">"back end" is still API at /api/word & /api/words</div>
 <div>
 	<WordTable words={data.words} />
 </div>
@@ -79,4 +75,3 @@
 <div>
 	<input class="btn" type="button" on:click={refresh} value="Refresh Page" />
 </div>
-

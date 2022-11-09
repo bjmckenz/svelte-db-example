@@ -63,20 +63,3 @@
 <div>
 	<input class="btn" type="button" on:click={refresh} value="Refresh Page" />
 </div>
-
-<style>
-	.title {
-		margin: 20px;
-		text-align: center;
-		font-size: 24pt;
-		font-family: Arial;
-		font-style: bold;
-	}
-	.note {
-		margin: 20px;
-		text-align: center;
-		font-size: 12pt;
-		font-family: Arial;
-	}
-
-</style>

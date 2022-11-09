@@ -1,8 +1,8 @@
 <script>
 	import { page } from '$app/stores';
 
-// This is a "view a word" page. You could call it a detail page. 
-// Word rowid is the key (/word/999).
+	// This is a "view a word" page. You could call it a detail page.
+	// Word rowid is the key (/word/999).
 
 	import { onMount } from 'svelte';
 
@@ -20,7 +20,7 @@
 		const response_json = await response1.json();
 
 		console.log({ response_json });
-		
+
 		// updating of these will trigger a UI update/repaint with the new item
 		if (response_json.status == 'success') {
 			word = response_json;
@@ -48,7 +48,9 @@
 		font-family: Arial;
 		font-style: bold;
 	}
-	.title, .data, .error {
+	.title,
+	.data,
+	.error {
 		text-align: center;
 		font-size: 3vw;
 		font-family: Arial;
@@ -59,6 +61,8 @@
 		font-weight: bold;
 	}
 	.error {
+		margin: 20px;
+		border-radius: 25px;
 		background-color: red;
 	}
 </style>
