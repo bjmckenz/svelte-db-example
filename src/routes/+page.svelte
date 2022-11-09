@@ -6,6 +6,7 @@
 </div>
 
 <div class=pagelink><a href="base_my_data_api">Base My Data! (using an API)</a></div>
+<div class=pagelink><a href="base_my_data_axios">Base My Data! (using an Axios & API)</a></div>
 <div class=pagelink><a href="base_my_data_html_form">Base My Data! (using an HTML form)</a></div>
 <div class=pagelink><a href="base_my_data_manual_fetch">Base My Data! (using a fetch/POST, no real form)</a></div>
 <div class=pagelink><a href="base_my_data_manual_fetch_redirect">Base My Data! (using a fetch/POST, no real form, then redirect to object)</a></div>
